@@ -13,7 +13,6 @@ public class expenseController {
 
     @Autowired
     private ExpenseService expenseService;
-
     @GetMapping("/expenses")
     public List<Expense> getAllExpenses(){
         return expenseService.getExpenses();
@@ -23,5 +22,20 @@ public class expenseController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense){
         return expenseService.createExpense(expense);
+    }
+
+    @GetMapping("/expenses/{id}")
+    public Expense getAnExpenseById(@PathVariable Long id){
+        return expenseService.getExpenseById(id);
+    }
+    @PutMapping("/expenses/{id}")
+    public Expense updateExpense(@RequestBody Expense expense, @PathVariable Long id){
+        return expenseService.updateAnExpense(expense, id);
+    }
+
+    @DeleteMapping("/expenses/{id}")
+    @ResponseStatus(code= HttpStatus.NO_CONTENT)
+    public void deleteExpense(@PathVariable Long id){
+        expenseService.deleteExpense(id);
     }
 }
