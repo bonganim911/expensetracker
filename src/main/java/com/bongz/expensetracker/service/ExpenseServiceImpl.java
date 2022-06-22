@@ -4,6 +4,8 @@ import com.bongz.expensetracker.model.Expense;
 import com.bongz.expensetracker.repository.ExpenseRepository;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class ExpenseServiceImpl implements ExpenseService{
     private ExpenseRepository expenseRepository;
 
     @Override
-    public List<Expense> getExpenses() {
-        return expenseRepository.findAll();
+    public Page<Expense> getExpenses(Pageable page) {
+        return expenseRepository.findAll(page);
     }
 
     @Override
